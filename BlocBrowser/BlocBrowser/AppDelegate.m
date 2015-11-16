@@ -20,10 +20,23 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    UIViewController *viewController = [[ViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
+    
+    UIAlertController *alertMessage = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Welcome Stranger!",nil) message:@"Enjoy using the Browser" preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                       style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertMessage addAction:okAction];
+    
+    [viewController presentViewController:alertMessage animated:YES completion:nil];
+    
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

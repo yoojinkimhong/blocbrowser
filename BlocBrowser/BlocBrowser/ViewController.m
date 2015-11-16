@@ -26,6 +26,7 @@
 #pragma mark - UIViewController
 
 - (void)loadView {
+    
     UIView *mainView = [UIView new];
     
     self.webView = [[WKWebView alloc] init];
@@ -107,6 +108,8 @@
     [textField resignFirstResponder];
     
     NSString *URLString = textField.text;
+    
+    
     
     if ([URLString containsString:@" "]) {
         NSString *escapedString = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
