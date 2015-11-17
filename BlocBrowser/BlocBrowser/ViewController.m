@@ -52,6 +52,7 @@
     }
     
     self.view = mainView;
+    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
 }
 
 - (void)viewWillLayoutSubviews {
@@ -65,7 +66,7 @@
     // Now, assign the frames
     self.textField.frame = CGRectMake(0, 0, width, itemHeight);
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
-    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
+    
 }
 
 #pragma mark - AwesomeFloatingToolbarDelegate
@@ -92,6 +93,18 @@
         toolbar.frame = potentialNewFrame;
     }
 }
+
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didPinchWithTitle:(CGFloat *)scale {
+    NSLog(@"scale is: %f", *scale);
+    [toolbar setTransform:CGAffineTransformScale(toolbar.transform, *scale, *scale)];
+    
+    CGAffineTransform currentTransform = CGAffineTransformIdentity;
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, *scale, *scale);
+    //toolbar.transform = newTransform;
+    
+}
+
+
 
 #pragma mark - UITextFieldDelegate
 

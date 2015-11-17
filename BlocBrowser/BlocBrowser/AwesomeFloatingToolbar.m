@@ -16,6 +16,8 @@
 @property (nonatomic, weak) UILabel *currentLabel;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong) UIPinchGestureRecognizer *pinchGesture;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longpressGesture;
 
 @end
 
@@ -74,6 +76,12 @@
         
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panFired:)];
         [self addGestureRecognizer:self.panGesture];
+        
+        self.pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchFired:)];
+        [self addGestureRecognizer:self.pinchGesture];
+        
+        self.longpressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressFired:)];
+        [self addGestureRecognizer:self.longpressGesture];
     }
     
     return self;
@@ -104,6 +112,36 @@
         }
         
         [recognizer setTranslation:CGPointZero inView:self];
+    }
+}
+
+- (void) pinchFired:(UIPinchGestureRecognizer *)recognizer {
+    CGFloat scale = [recognizer scale];
+    
+    if ([self.delegate respondsToSelector:@selector(floatingToolbar:didPinchWithTitle:)]) {
+        [self.delegate floatingToolbar:self didPinchWithTitle:&scale];
+    }
+}
+
+- (void) longpressFired:(UILongPressGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateRecognized) {
+        // rotate the colors
+        NSMutableArray *newColors = [self.colors mutableCopy];
+        
+        for (NSInteger i = 0; i < self.colors.count; i++) {
+            if (i != self.colors.count - 1) {
+                newColors[i + 1] = self.colors[i];
+            } else {
+                newColors[0] = self.colors[i];
+            }
+        }
+        
+        self.colors = [newColors copy];
+        
+        for (NSInteger i = 0; i < self.labels.count; i++) {
+            UILabel *label = self.labels[i];
+            label.backgroundColor = newColors[i];
+        }
     }
 }
 
