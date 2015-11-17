@@ -103,9 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				19C3DFD61BF96A7F006E4223 /* AppDelegate.h */,
+				19C3DFD71BF96A7F006E4223 /* AppDelegate.m */,
 				19C3E0061BF9AF6D006E4223 /* AwesomeFloatingToolbar.h */,
 				19C3E0071BF9AF6D006E4223 /* AwesomeFloatingToolbar.m */,
-				19C3DFD71BF96A7F006E4223 /* AppDelegate.m */,
 				19C3DFD91BF96A7F006E4223 /* ViewController.h */,
 				19C3DFDA1BF96A7F006E4223 /* ViewController.m */,
 				19C3DFDF1BF96A7F006E4223 /* Assets.xcassets */,

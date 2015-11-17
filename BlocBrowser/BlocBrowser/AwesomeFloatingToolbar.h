@@ -15,6 +15,8 @@
 @optional
 
 - (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didSelectButtonWithTitle:(NSString *)title;
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didTryToPanWithOffset:(CGPoint)offset;
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didPinchWithTitle:(CGFloat *)scale;
 
 @end
 
@@ -23,6 +25,8 @@
 - (instancetype) initWithFourTitles:(NSArray *)titles;
 
 - (void) setEnabled:(BOOL)enabled forButtonWithTitle:(NSString *)title;
+
+
 
 @property (nonatomic, weak) id <AwesomeFloatingToolbarDelegate> delegate;
 
